@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34309.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "coollisions", "coollisions\coollisions.csproj", "{2B5E2EDD-2F43-4F93-B5F5-90C8FFD59E5E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2B5E2EDD-2F43-4F93-B5F5-90C8FFD59E5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B5E2EDD-2F43-4F93-B5F5-90C8FFD59E5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B5E2EDD-2F43-4F93-B5F5-90C8FFD59E5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B5E2EDD-2F43-4F93-B5F5-90C8FFD59E5E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0CD00CE7-CD46-4AAE-A460-A7A3BA57378E}
+	EndGlobalSection
+EndGlobal
