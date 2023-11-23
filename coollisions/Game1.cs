@@ -100,8 +100,8 @@ namespace coollisions
             //}
 
             if ((Mouse.GetState().LeftButton == ButtonState.Pressed) &&
-                Enumerable.Range((int)Math.Floor(squarePosition[0].X - 80), (int)Math.Ceiling(squarePosition[0].X)).Contains(Mouse.GetState().X) &&
-                Enumerable.Range((int)Math.Floor(squarePosition[0].Y), (int)Math.Ceiling(squarePosition[0].Y + 80)).Contains(Mouse.GetState().Y))
+                (Convert.ToDouble(Mouse.GetState().X) >= Math.Floor(squarePosition[0].X - 80)) && (Convert.ToDouble(Mouse.GetState().X) <= Math.Ceiling(squarePosition[0].X)) &&
+                (Convert.ToDouble(Mouse.GetState().Y) >= Math.Floor(squarePosition[0].Y)) && (Convert.ToDouble(Mouse.GetState().Y) <= Math.Ceiling(squarePosition[0].Y + 80)))
                 squarePosition.Add(new(100, 200));
 
             base.Update(gameTime);
