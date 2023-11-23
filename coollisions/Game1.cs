@@ -1,7 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace coollisions
 {
@@ -10,9 +13,12 @@ namespace coollisions
         //we are creating some variables: the texture, position, and speed of the ball
         Texture2D ballTexture;
         Vector2 ballPosition;
+        Texture2D squareTexture;
+        List<Vector2> squarePosition;
         float ballSpeed;
         float gravideeA;
         float gravideeV;
+
 
         //Both of these variables that are used for drawing to the screen, as you will see in a later tutorial.
         private GraphicsDeviceManager _graphics;
@@ -32,6 +38,7 @@ namespace coollisions
             // TODO: Add your initialization logic here
             //initializing ballPosition using the resolution of the screen
             ballPosition = new Vector2(_graphics.PreferredBackBufferWidth / 2, 0);
+            squarePosition = new() { new(_graphics.PreferredBackBufferWidth, 0) };
             //initializing ball speed
             ballSpeed = 300f;
             gravideeA = 0.2f;
@@ -54,7 +61,7 @@ namespace coollisions
         {
             //setting exit keys
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+                Exit(); //Content.Unload();
 
             // TODO: Add your update logic here
             //getting data from the keys and setting the ball position accordingly (moving the ball)
@@ -84,7 +91,18 @@ namespace coollisions
             else if (ballPosition.Y < ballTexture.Height / 2)
                 ballPosition.Y = ballTexture.Height / 2;
 
-            Debug.WriteLine($"{gravideeV}, {ballPosition.Y + (ballTexture.Height / 2)}, {_graphics.PreferredBackBufferHeight}");
+            //Debug.WriteLine($"{gravideeV}, {ballPosition.Y + (ballTexture.Height / 2)}, {_graphics.PreferredBackBufferHeight}");
+            //if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            //{
+            //    ballPosition.X = Mouse.GetState().X;
+            //    ballPosition.Y = Mouse.GetState().Y;
+            //    gravideeV = 0;
+            //}
+
+            if ((Mouse.GetState().LeftButton == ButtonState.Pressed) &&
+                Enumerable.Range((int)Math.Floor(squarePosition[0].X - 80), (int)Math.Ceiling(squarePosition[0].X)).Contains(Mouse.GetState().X) &&
+                Enumerable.Range((int)Math.Floor(squarePosition[0].Y), (int)Math.Ceiling(squarePosition[0].Y + 80)).Contains(Mouse.GetState().Y))
+                squarePosition.Add(new(100, 200));
 
             base.Update(gameTime);
         }
@@ -109,11 +127,18 @@ namespace coollisions
                 SpriteEffects.None, //effects
                 0f //layerdepth
             );
+
+            //square
+            Texture2D rect = new(_graphics.GraphicsDevice, 80, 80);
+            Color[] data = new Color[80 * 80];
+            for (int i = 0; i < data.Length; ++i) data[i] = Color.Chocolate;
+            rect.SetData(data);
+            squareTexture = rect;
+            foreach (Vector2 pos in squarePosition)
+                _spriteBatch.Draw(squareTexture, pos, null, Color.Black, 0f, new(squareTexture.Width, 0), Vector2.One, SpriteEffects.None, 0f);
+
+            //ends the drawing
             _spriteBatch.End();
-
-            //GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
 
             base.Draw(gameTime);
         }
